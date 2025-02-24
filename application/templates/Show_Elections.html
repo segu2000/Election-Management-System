@@ -1,0 +1,100 @@
+{% extends 'website_base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block child_template %}
+    <head>
+        <style>
+            .page-footer{
+                margin-left:-10% !important;
+                margin-right:-10% !important;
+            }
+        </style>
+    </head>
+<div>
+    <center>
+        <br><br>
+        <h1>
+        All Election Details
+    </h1>
+    </center>
+
+    <br>
+    <div class="row">
+        {% if elections %}
+            {% for e in elections %}
+            <div class="col m6 l6">
+                <div class="card">
+                    <div class="card-content">
+                        <h4 class="card-title">
+                            Name: {{e.election_name}}
+                        </h4>
+                        <p class="card-text">
+                            Election Instructions: {{e.election_description}}
+                        </p>
+                        <p class="card-text">
+                            Election Date: {{e.election_date}}
+                        </p>
+                        <p class="card-text">
+                            Result Date: {{e.election_result_date}}
+                        </p>
+                        {% if request.user.member_type == "VOT" %}
+                            {% if e.is_election_completed %}
+                                <a href="/election/results/{{e.pk}}" class="btn">
+                                    See Election Results
+                                </a>
+                            {% else %}
+                                <p>
+                                    <b>
+                                        Election results not yet declared
+                                    </b>
+                                </p>
+                                <br>
+                                {% if e.is_vote_utilized %}
+                                    <p>
+                                        <b>
+                                            You already utilized your vote and waiting for results.
+                                        </b>
+                                    </p>
+                                {% else %}
+                                <a href="/cast/vote/{{e.pk}}" class="btn">
+                                        Cast Vote
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+
+                        {% elif request.user.member_type == "CAN" %}
+                            {% if e.is_election_completed %}
+                        <br>
+                                <a href="/election/results/{{e.pk}}" class="btn">
+                                    See Election Results
+                                </a>
+                            {% else %}
+                                <p>
+                                    <b>
+                                        Election results not yet declared
+                                    </b>
+                                </p>
+                            {% endif %}
+                        {% else %}
+                        <br><br>
+                            <a href="/election/results/{{e.pk}}" class="btn">
+                                Declare Election Results
+                            </a>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+
+    </div>
+    <p class="text-center">
+                <center>
+        <b>No elections present in system. Please add election details through admin screen.</b>
+    </center>
+
+            </p>
+        {% endif %}
+</div>
+{% endblock %}

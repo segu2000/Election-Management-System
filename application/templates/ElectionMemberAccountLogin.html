@@ -1,0 +1,48 @@
+{% extends 'website_base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block child_template %}
+    <head>
+        <title> Admin signup </title>
+    </head>
+<div>
+    <div class="row">
+        <div class="col l6 push-l3">
+            <center>
+                 <i class="material-icons large">person_add</i>
+            <h1 class="text-center">Election System
+
+                Admin Member
+
+
+                Login</h1>
+            </center>
+
+            <br>
+            <form method="post" action="/admin/login/">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        {{form.email|as_crispy_field}}
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        {{form.password|as_crispy_field}}
+                    </div>
+                </div>
+                <br>
+                <center>
+                    <button type="submit" class="btn screen-primary-btn">
+                    Login
+                </button>
+                    <br><br>
+                </center>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

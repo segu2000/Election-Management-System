@@ -1,0 +1,63 @@
+{% extends 'website_base.html' %} {% load static %} {% load crispy_forms_tags %} {% block child_template %}
+<head>
+</head>
+<div id="child_template">
+    <h2 class="screen-header text-center">Voter Features</h2>
+    <br>
+    <div class="row">
+        <div class="col m4">
+            <div class="card">
+                <div class="card-content">
+                    <h5 class="card-title">
+                        Upload Additional Details
+                    </h5>
+                    <p class="card-text">
+                        Upload Additional details to create voter id & password by admin
+                    </p>
+                    <br>
+                    {% if voter.ssn %}
+                        <p>
+                            <b>
+                                Details already updated.
+                            </b>
+                        </p>
+                    {% else %}
+                    <a href="/voter/upload/details/" class="card-link">Upload details</a>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+        <div class="col m4">
+            <div class="card">
+                <div class="card-content">
+                    <h5 class="card-title">
+                        My Profile
+                    </h5>
+                    <p class="card-text">
+                        Profile information voter
+                    </p>
+                    <br><br>
+                    <a href="/voter/{{voter_id}}" target="_blank" class="btn card-link">See details</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col m4">
+            <div class="card">
+                <div class="card-content">
+                    <h5 class="card-title">
+                        See Elections
+                    </h5>
+                    <p class="card-text">
+                        See all future elections
+                    </p>
+                    <br><br>
+                    <a href="/present/elections/" class="btn card-link">See Elections</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

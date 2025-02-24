@@ -1,0 +1,60 @@
+{% extends 'website_base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block child_template %}
+    <head>
+        <title> Admin details </title>
+    </head>
+<div>
+     <center>
+         <i class="material-icons large">person</i>
+            <h1 class="screen-header text-center">
+            Profile Details
+        </h1>
+         <br>
+        </center>
+        <div class="row">
+        <br>
+        <div class="col-md-12 col-lg-12">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Mobile Number</th>
+                    <th>Email</th>
+                    <th>Is Password set</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{request.user.last_name}}</td>
+                        <td>{{request.user.first_name}}</td>
+                        <td>{{request.user.phone_number}}</td>
+                        <td>{{request.user.email}}</td>
+                        <td>True</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <br>
+            <br>
+
+                <br>
+            <center>
+                <a class="btn screen-primary-btn" href="/admin/home/">
+                    Home
+                </a>
+                <br><br><br>
+            </center>
+        </div>
+    </div>
+
+
+
+
+
+
+
+</div>
+{% endblock %}

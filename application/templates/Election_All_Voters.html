@@ -1,0 +1,72 @@
+{% extends 'website_base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block child_template %}
+    <head>
+        <title> Voters </title>
+<style>
+</style>
+    </head>
+<div>
+    <center>
+        <br>
+        <i class="material-icons large">people_outline</i>
+        <h1>
+            All Registered Voters in System
+        </h1>
+        <br>
+    </center>
+    <div class="row">
+
+        <div class="col m12 l12">
+            {% if voters %}
+                <table class="striped highlight centered">
+                <thead>
+                <tr>
+                    <th>Voter Name</th>
+                    <th>Mobile Number</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    {% if request.user.is_superuser %}
+                        <th>#</th>
+                    {% endif %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for v in voters %}
+                    <tr>
+                        <td>{{v.member.first_name}},{{v.user.last_name}}</td>
+                        <td>{{v.member.phone_number}}</td>
+                        <td>{{v.member.email}}</td>
+                        <td>{{v.full_address}}</td>
+                        {% if request.user.is_superuser %}
+                            {% if v.is_active %}
+                                {% if v.is_account_verified %}
+                                    <td><p>Details Verified</p></td>
+                                {% else %}
+                                    <td><a href="/voter/{{v.pk}}/">See Voter Details</a></td>
+                                {% endif %}
+                            {% else %}
+                            <td>
+                                <p>
+                                    Admin made inactive.
+                                </p>
+                            </td>
+                            {% endif %}
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <br>
+            {% else %}
+                <p class="text-center">
+                    <b>No voters enrolled yet</b>
+                </p>
+            {% endif %}
+        </div>
+        <br><br>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+body {
+     font-family: "Times New Roman", Times, serif !important;
+     background-color: #FFFFFF !important;
+}
+.screen-header {
+     color: #088F8F !important;
+}
+ @media only screen and (min-width: 1000px) {
+     .container {
+         margin-left: 40px;
+         margin-right: 40px;
+    }
+}
+ .screen-primary-btn {
+     background-color: #088F8F !important;
+     color: white !important;
+     width: 185px !important;
+}
+ .remove-btn {
+     width: 180px !important;
+}
+ .alert {
+     padding: 15px;
+     margin-bottom: 20px;
+     border: 1px solid transparent;
+     border-radius: 4px;
+}
+ .success {
+     color: rgb(60,118,61) !important;
+     background-color: rgb(223,240,216) !important;
+     border-color: rgb(214,233,198) !important;
+}
+ .warning {
+     color: rgb(138,109,59) !important;
+     background-color: rgb(252,248,227) !important;
+     border-color: #faebcc !important;
+}
+ .info {
+     color: #3c763d !important;
+     background-color: #dff0d8;
+     border-color: #d6e9c6 !important;
+}
+ .form-control.form-control-solid {
+     background-color: #ffffff !important;
+     border-radius: 20px !important;
+}

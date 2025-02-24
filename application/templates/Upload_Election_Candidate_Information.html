@@ -1,0 +1,86 @@
+{% extends 'website_base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block child_template %}
+<head>
+    <style>
+        select{
+            display:block;
+        }
+    </style>
+</head>
+<div id="child_template">
+    <center>
+        <br>
+        <h1 class="screen-header">
+            Candidate Additional Details
+        </h1>
+        <br>
+    </center>
+
+<form id="candidate_details"
+      class="candidate_details"
+      enctype="multipart/form-data" method="post" action="{% url 'save_candidate_details' %}">
+
+    {% csrf_token %}
+    <div class="row">
+        <div class="col l6">
+            {{form.birth_date|as_crispy_field}}
+            <br>
+        </div>
+        <div class="col l6">
+            {{form.person_type|as_crispy_field}}
+            <br>
+        </div>
+        </div>
+    <div class="row">
+        <div class="col l6">
+            {{form.full_address|as_crispy_field}}
+            <br>
+        </div>
+        <div class="col l6">
+            {{form.state|as_crispy_field}}
+            <br>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col l6">
+            {{form.postal_code|as_crispy_field}}
+            <br>
+        </div>
+        <div class="col l6">
+            {{form.ssn|as_crispy_field}}
+            <br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col l6">
+            {{form.candidate_party|as_crispy_field}}
+            <br>
+        </div>
+        <div class="col l6">
+            {{form.address_proof|as_crispy_field}}
+            <br>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col l6">
+            {{form.other_proof|as_crispy_field}}
+            <br>
+        </div>
+    </div>
+
+
+    <center>
+                    <br>
+                    <button type="submit" class="btn screen-primary-btn">
+                        Upload Profile
+                    </button>
+        <br><br><br>
+                </center>
+            </form>
+        </div>
+
+{% endblock %}

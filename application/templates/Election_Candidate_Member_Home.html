@@ -1,0 +1,70 @@
+{% extends 'website_base.html' %} {% load static %} {% load crispy_forms_tags %} {% block child_template %}
+<head>
+    <title>Admin Home</title>
+</head>
+<div id="child_template">
+    <br>
+    <center>
+        <h1>Election System Candidate</h1>
+    </center>
+
+    <br>
+    <div class="row">
+        <div class="col m4">
+            <div class="card">
+                <div class="card-content">
+                    <h5 class="card-title">
+                        Upload Additional Details
+                    </h5>
+                    <p class="card-text">
+                        Upload Additional details to create candidate id & password
+                    </p>
+                    <br>
+                    {% if candidate.ssn %}
+                        <p>
+                            <b>Details updated</b>
+
+                        </p>
+                    <br>
+                    {% else %}
+                        <a href="/cand/upload/details/" class="btn">Update details</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col m4">
+            <div class="card">
+                <div class="card-content">
+                    <h5 class="card-title">
+                        My Profile
+                    </h5>
+                    <p class="card-text">
+                        Profile information
+                    </p>
+                    <br><br>
+                    <a href="/cand/{{candidate_id}}/" class="btn">See details</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col m4">
+            <div class="card">
+                <div class="card-content">
+                    <h5 class="card-title">
+                        See Elections
+                    </h5>
+                    <p class="card-text">
+                        See all future elections
+                    </p>
+                    <br><br>
+                    <a href="/present/elections/" class="btn">See Elections</a>
+                </div>
+            </div>
+            <br><br><br>
+        </div>
+        <br><br>
+
+    </div>
+
+</div>
+{% endblock %}

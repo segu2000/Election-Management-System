@@ -1,0 +1,78 @@
+{% extends 'website_base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block child_template %}
+    <head>
+        <title> Candidates </title>
+    </head>
+<div>
+    <center>
+        <i class="material-icons large">people_outline</i>
+        <h1>
+            All Candidates
+        </h1>
+    </center>
+
+    <br>
+    <div class="row">
+
+        <br>
+        <div class="col-md-12 col-lg-12">
+            {% if candidates %}
+                <table class="table">
+                <thead>
+                <tr>
+                    <th>Candicate Name</th>
+                    <th>Candidate ID</th>
+                    <th>Mobile Number</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    {% if request.user.is_superuser %}
+                        <th>#</th>
+                    {% endif %}
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for c in candidates %}
+                    <tr>
+                        <td>{{c.pk}}{{c.member.first_name}},{{c.member.last_name}}</td>
+                        <td>{{c.candidate_id}}</td>
+                        <td>{{c.member.phone_number}}</td>
+                        <td>{{c.member.email}}</td>
+                        <td>{{c.full_address}}</td>
+
+                        {% if request.user.is_superuser %}
+                            {% if c.is_fault_account %}
+                                 <td>
+                                    <p>Candidate deleted by admin</p>
+                                </td>
+                            {% else %}
+                               {% if c.is_candidate_verified %}
+                                     <td>
+                                         <p>
+                                             Candidate Verified
+                                         </p>
+                                     </td>
+                                    {% else %}
+                                        <td><a href="/cand/{{c.pk}}">See Candidate Details</a></td>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <br><br><br><br>
+            {% else %}
+            <p class="text-center">
+                <b>
+                    No Candidate enrolled yet
+                </b>
+            </p>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}

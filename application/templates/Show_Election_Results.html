@@ -1,0 +1,57 @@
+{% extends 'website_base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block child_template %}
+    <head></head>
+<div>
+    <br>
+    <center>
+       <h1>
+        Election Results
+    </h1>
+    </center>
+
+    <br>
+    <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Election Name</th>
+                <th>Election Date</th>
+                <th>Candidate Name</th>
+                <th>Candidate Party</th>
+                <th>Total Votes Polled</th>
+                <th>Candidate Votes</th>
+                <th>Voting Perc(%)</th>
+                <th>Is Winner</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for r in results %}
+                <tr>
+                    <td>{{r.election__election_name}}</td>
+                    <td>{{r.election__election_date}}</td>
+                    <td>{{r.candidate__member__first_name}},{{r.candidate__member__last_name}}</td>
+                    <td>
+                        {{r.candidate__political_party}}
+                    </td>
+                    <td>
+                        {{total_votes}}
+                    </td>
+                    <td>{{r.the_count}}</td>
+                    <td>{{r.voting_perc}}</td>
+                    <td>
+                        {% if maximum_votes == r.the_count %}
+                            Yes
+                        {% else %}
+                            No
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <br><br><br><br><br><br><br>
+    </div>
+</div>
+{% endblock %}

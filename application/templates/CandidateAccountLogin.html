@@ -1,0 +1,39 @@
+{% extends 'website_base.html' %} {% load static %} {% load crispy_forms_tags %} {% block child_template %}
+<head>
+    <title> Election member registration </title>
+</head>
+<div id="child_template">
+    <center>
+         <i class="material-icons large">person_add</i>
+         <h1 class="text-center">
+                {% if "cand" in request.path %}
+                    Election System Candidate Login
+                {% else %}
+                    Election System Voter Login
+                {% endif %}
+
+            <br>
+    </center>
+    <div class="row">
+        <div class="col l12 ">
+            <form method="post"
+                  action="{{post_url}}">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col l6">
+                                {{form.candidate_id|as_crispy_field}}
+                            </div>
+                            <div class="col l6">
+                                {{form.password|as_crispy_field}}
+                            </div>
+                        </div>
+                        <br>
+                        <center>
+                            <button type="submit" class="btn screen-primary-btn">Login</button>
+                            <br><br><br>
+                            <p style="color:red;">{{msg}}</p>
+                        </center>
+                    </form>
+        </div>
+    </div>
+</div> {% endblock %}

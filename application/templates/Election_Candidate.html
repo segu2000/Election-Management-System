@@ -1,0 +1,107 @@
+{% extends 'website_base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block child_template %}
+    <head>
+        <title> Candidates </title>
+
+    </head>
+<div>
+     <center>
+         <i class="material-icons large">person</i>
+            <h1 class="screen-header text-center">
+            Candidate Details
+        </h1>
+         <br>
+        </center>
+    {% if candidate.full_address %}
+        <div class="row">
+        <br>
+        <div class="col-md-12 col-lg-12">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Candidate Name</th>
+                    <th>Candidate ID</th>
+                    <th>Mobile Number</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>SSN Number</th>
+                    <th>
+                        Is Verified
+                    </th>
+<!--                    <th>Other Documents</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{candidate.member.first_name}},{{candidate.member.last_name}}</td>
+                        <td>
+                            {{candidate.candidate_id}}
+                        </td>
+                        <td>{{candidate.member.phone_number}}</td>
+                        <td>{{candidate.member.email}}</td>
+                        <td>{{candidate.full_address}}</td>
+                        <td>{{candidate.ssn}}</td>
+                        <td>
+                            {% if candidate.is_candidate_verified %}
+                                <p>
+                                    Details verified
+                                </p>
+                            {% else %}
+                            <p>
+                                Details not yet verified
+                            </p>
+                            {% endif %}
+                        </td>
+
+<!--                        <td><img src="#"></td>-->
+                    </tr>
+                </tbody>
+            </table>
+
+            <br>
+            <br>
+            {% if request.user.is_superuser %}
+            <center>
+                <a class="btn screen-primary-btn" href="/cand/verify/{{candidate.pk}}">
+                    Verify Candidate Details
+                </a>
+                <br><br>
+                <a class="btn btn-danger remove-btn" href="/cand/del/{{candidate.pk}}">
+                    Remove Fault Candidate
+                </a>
+                <br><br><br>
+            </center>
+            {% else %}
+                <br>
+            <center>
+                <a class="btn screen-primary-btn" href="/cand/home/">
+                    Home
+                </a>
+            </center>
+
+            {% endif %}
+        </div>
+    </div>
+    {% else %}
+        <p class="text-center">
+            <b>Candidate not yet completed profile</b>
+        </p>
+    <br>
+    <center>
+        <center> {% if request.user.member_type == "CAN" %}
+                    <a class="btn screen-primary-btn" href="/cand/upload/details/">
+                    Complete Profile </a>
+            <br><br><br><br><br><br><br><br>
+            {% endif %}
+        </center>
+
+    </center>
+
+    {% endif %}
+
+
+
+</div>
+{% endblock %}

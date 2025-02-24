@@ -1,0 +1,63 @@
+{% extends 'website_base.html' %} {% load crispy_forms_tags %} {% load static %} {% block child_template %} <head>
+  <title> Admin - Voter Details </title>
+</head>
+<div id="child_template">
+  <center>
+    <i class="material-icons large">person</i>
+    <br><br>
+    <h1> Voter Details </h1>
+    <br>
+  </center> {% if voter.full_address %} <div class="row">
+    <br>
+    <div class="col-md-12 col-lg-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Voter Name</th>
+            <th>Mobile Number</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>SSN Number</th>
+            <th>Is Verified</th>
+            <!--                    <th>Other Documents</th>-->
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{voter.member.first_name}},{{voter.member.last_name}}</td>
+            <td>{{voter.member.phone_number}}</td>
+            <td>{{voter.member.email}}</td>
+            <td>{{voter.full_address}}{{voter.zip_code}}</td>
+            <td>{{voter.ssn}}</td>
+
+            <td> {% if voter.is_account_verified %} Yes {% else %} No {% endif %} </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <br>
+      <center> {% if request.user.member_type == "VOT" %} <a class="btn screen-primary-btn" href="/voter/home/"> Home </a> {% endif %} </center> {% if request.user.is_superuser %} {% if voter.is_account_verified %} <center>
+        <p class="text-center">
+          <i class="material-icons Small">check</i>
+          <b>Voter Details verified</b>
+        </p>
+      </center> {% else %} <center>
+        <a class="btn screen-primary-btn" href="/voter/verify/{{voter.pk}}"> Verify Voter Details </a>
+        <br>
+        <br>
+        <a class="btn btn-danger remove-btn" href="/voter/del/{{voter.pk}}"> Delete Voter Details </a>
+      </center> {% endif %} {% endif %}
+    </div>
+  </div> {% else %} <p class="center">
+    <b>Voter not yet completed profile</b>
+
+  </p>
+  <center>
+    <a class="btn screen-primary-btn" href="/admin/home/">Home </a>
+  </center>
+
+  <br>
+  <center> {% if request.user.member_type == "VOT" %}
+    <a class="btn screen-primary-btn" href="/voter/upload/details/"> Complete Profile </a>
+    {% endif %} </center> {% endif %}
+</div> {% endblock %}
